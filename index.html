@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#10110f">
+  <meta name="description" content="A personal martial arts video notebook and training library.">
+  <title>Combat Notes — Martial Arts Notebook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+  <div class="boot-screen" id="bootScreen" aria-hidden="true"><div class="boot-monogram">CN</div><div class="boot-line"><i></i></div><span>Building your archive</span></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span></span></div>
+  <header class="topbar">
+    <button class="brand" data-view="library" aria-label="Combat Notes home">
+      <span>Combat</span><span>Notes</span>
+    </button>
+    <p class="tagline">A living archive for the way you fight.</p>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <button class="nav-link active" data-view="library">Library</button>
+      <button class="nav-link" data-view="practice">Practice</button>
+      <button class="nav-link" data-view="collections">Collections</button>
+    </nav>
+    <button class="icon-btn" id="settingsBtn" aria-label="Settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.55V21h-4v-.08A1.7 1.7 0 0 0 8.95 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.58 15 1.7 1.7 0 0 0 3 14H3v-4h.08A1.7 1.7 0 0 0 4.6 8.95a1.7 1.7 0 0 0-.34-1.88L4.2 7l2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.58 1.7 1.7 0 0 0 10 3V3h4v.08A1.7 1.7 0 0 0 15.05 4.6a1.7 1.7 0 0 0 1.88-.34L17 4.2 19.83 7l-.06.06A1.7 1.7 0 0 0 19.42 9 1.7 1.7 0 0 0 21 10h.08v4H21a1.7 1.7 0 0 0-1.6 1Z"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <section class="view active" id="libraryView">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Your fight archive · <span id="techniqueCount">0 techniques</span></p>
+          <h1>Remember what<br><em>moves you.</em></h1>
+        </div>
+        <div class="hero-action"><span class="hero-index">EST. MMXXVI</span><button class="circle-add magnetic" id="addTechniqueBtn" aria-label="Add technique"><span>+</span><small>Add note</small></button></div>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="searchInput" type="search" placeholder="Search techniques, notes, tags…" autocomplete="off">
+        </label>
+        <button class="filter-button" id="filterToggle">Filter <span id="filterCount"></span></button>
+      </div>
+
+      <div class="discipline-strip" id="disciplineStrip" aria-label="Filter by discipline"></div>
+
+      <div class="filter-panel" id="filterPanel" hidden>
+        <div><span class="filter-label">Status</span><div class="choice-row" id="statusFilters"></div></div>
+        <div><span class="filter-label">Format</span><div class="choice-row" id="formatFilters"></div></div>
+        <button class="text-button" id="clearFilters">Clear filters</button>
+      </div>
+
+      <section class="library-section">
+        <div class="section-head">
+          <h2 id="libraryTitle">All techniques</h2><span class="section-rule"></span>
+          <div class="view-actions">
+            <select id="sortSelect" aria-label="Sort techniques"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">A–Z</option><option value="confidence">Confidence</option></select>
+            <button class="layout-toggle active" data-layout="grid" aria-label="Grid view">⊞</button>
+            <button class="layout-toggle" data-layout="list" aria-label="List view">☷</button>
+          </div>
+        </div>
+        <div class="technique-grid" id="techniqueGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <span class="empty-mark">∅</span><h3>No techniques here yet.</h3><p>Save a video, add what you noticed, and make it part of your game.</p><button class="pill-button" id="emptyAddBtn">Add your first note</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" id="practiceView">
+      <div class="page-intro"><p class="eyebrow">Practice queue</p><h1>Turn watching<br><em>into doing.</em></h1><p>Techniques marked “Drilling” or “Learning” appear here. Update confidence as they become part of your game.</p></div>
+      <div class="practice-grid" id="practiceGrid"></div>
+    </section>
+
+    <section class="view" id="collectionsView">
+      <div class="page-intro"><p class="eyebrow">Your systems</p><h1>Every art,<br><em>in its place.</em></h1><p>Create disciplines and organize them with your own subsections.</p></div>
+      <div class="collection-grid" id="collectionGrid"></div>
+      <button class="outlined-large" id="addDisciplineBtn">+ Add discipline</button>
+    </section>
+  </main>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button class="active" data-view="library"><span>◫</span>Library</button><button data-view="practice"><span>◎</span>Practice</button><button data-view="collections"><span>⌘</span>Arts</button>
+  </nav>
+
+  <dialog id="techniqueDialog" class="sheet">
+    <form id="techniqueForm" method="dialog">
+      <div class="sheet-head"><div><p class="eyebrow" id="formEyebrow">New entry</p><h2 id="formTitle">Add to your archive</h2></div><button type="button" class="close-btn" data-close="techniqueDialog">×</button></div>
+      <input type="hidden" id="techniqueId">
+      <div class="capture-intro"><span class="capture-step">01</span><div><strong>Capture the source</strong><p>Paste the clip and give it a name you’ll recognize in training.</p></div></div>
+      <div class="form-grid">
+        <label class="full url-field"><span>Video link</span><div class="url-input-wrap"><span id="urlPlatform">↗</span><input id="videoUrl" type="url" placeholder="Paste Instagram, TikTok or YouTube link" required></div></label>
+        <label class="full"><span>Technique name</span><input id="techniqueName" placeholder="e.g. Knee-cut pass to mount" required maxlength="100"></label>
+      </div>
+      <div class="capture-intro second"><span class="capture-step">02</span><div><strong>Place it in your game</strong><p>You can develop the details later inside the workshop.</p></div></div>
+      <div class="form-grid">
+        <label><span>Discipline</span><select id="disciplineSelect" required></select></label>
+        <label><span>Subsection</span><select id="subsectionSelect" required></select></label>
+        <label><span>Status</span><select id="statusSelect"><option>Inbox</option><option>Want to learn</option><option>Learning</option><option>Drilling</option><option>Reliable</option></select></label>
+        <label><span>Format</span><select id="formatSelect"><option>General</option><option>Gi</option><option>No-Gi</option><option>MMA</option><option>Self-defense</option></select></label>
+        <label class="full"><span>Tags</span><input id="tagsInput" placeholder="pressure, southpaw, counter (comma separated)"></label>
+        <label class="full"><span>Key details</span><textarea id="notesInput" rows="5" placeholder="What makes this work? Add steps, cues, common mistakes…"></textarea></label>
+        <label class="full confidence-field"><span>Confidence <output id="confidenceOutput">2 / 5</output></span><input id="confidenceInput" type="range" min="1" max="5" value="2"></label>
+      </div>
+      <div class="form-actions"><button type="button" class="danger-link" id="deleteTechnique" hidden>Delete</button><span></span><button type="button" class="ghost-button" data-close="techniqueDialog">Cancel</button><button class="pill-button" value="save">Save technique</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="workshopDialog" class="workshop">
+    <div id="workshopContent"></div>
+  </dialog>
+
+  <dialog id="disciplineDialog" class="small-dialog">
+    <form id="disciplineForm" method="dialog"><button type="button" class="close-btn" data-close="disciplineDialog">×</button><p class="eyebrow">New collection</p><h2>Add a discipline</h2><label><span>Name</span><input id="disciplineName" required placeholder="e.g. Wrestling"></label><label><span>Subsections</span><input id="disciplineSubs" required placeholder="Takedowns, Control, Escapes"></label><p class="field-help">Separate subsections with commas.</p><button class="pill-button full-button">Create discipline</button></form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="small-dialog">
+    <div><button type="button" class="close-btn" data-close="settingsDialog">×</button><p class="eyebrow">Settings</p><h2>Your archive</h2><p class="muted">Your data stays in this browser. Export a backup to move it to another device.</p><div class="settings-actions"><button class="outlined-large" id="exportBtn">Export backup</button><label class="outlined-large file-label">Import backup<input type="file" id="importInput" accept="application/json"></label></div><p class="storage-note" id="storageNote"></p></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
