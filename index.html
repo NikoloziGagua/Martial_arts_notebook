@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
@@ -91,24 +91,51 @@
 
   <dialog id="techniqueDialog" class="sheet">
     <form id="techniqueForm" method="dialog">
-      <div class="sheet-head"><div><p class="eyebrow" id="formEyebrow">New entry</p><h2 id="formTitle">Add to your archive</h2></div><button type="button" class="close-btn" data-close="techniqueDialog">×</button></div>
-      <input type="hidden" id="techniqueId">
-      <div class="capture-intro"><span class="capture-step">01</span><div><strong>Capture the source</strong><p>Paste the clip and give it a name you’ll recognize in training.</p></div></div>
-      <div class="form-grid">
-        <label class="full url-field"><span>Video link</span><div class="url-input-wrap"><span id="urlPlatform">↗</span><input id="videoUrl" type="url" placeholder="Paste Instagram, TikTok or YouTube link" required></div></label>
-        <label class="full"><span>Technique name</span><input id="techniqueName" placeholder="e.g. Knee-cut pass to mount" required maxlength="100"></label>
+      <header class="sheet-head">
+        <div class="sheet-index">CN / NEW NOTE</div>
+        <div><p class="eyebrow" id="formEyebrow">New entry</p><h2 id="formTitle">Capture<br><em>the movement.</em></h2></div>
+        <button type="button" class="close-btn" data-close="techniqueDialog" aria-label="Close">×</button>
+      </header>
+      <div class="sheet-scroll">
+        <input type="hidden" id="techniqueId">
+        <section class="capture-block source-block">
+          <div class="capture-intro"><span class="capture-step">I</span><div><strong>The source</strong><p>Drop the clip now. Organize the lesson around it.</p></div></div>
+          <div class="form-grid">
+            <label class="full url-field"><span>Video link</span><div class="url-input-wrap"><span id="urlPlatform">↗</span><input id="videoUrl" type="url" inputmode="url" placeholder="Instagram, TikTok or YouTube link" required><button type="button" id="pasteUrlBtn">Paste</button></div></label>
+            <label class="full title-field"><span>Technique name</span><input id="techniqueName" placeholder="What would you call this?" required maxlength="100"></label>
+          </div>
+        </section>
+        <section class="capture-block">
+          <div class="capture-intro"><span class="capture-step">II</span><div><strong>Your system</strong><p>Put the movement where you’ll find it again.</p></div></div>
+          <div class="form-grid compact-grid">
+            <label><span>Discipline</span><select id="disciplineSelect" required></select></label>
+            <label><span>Subsection</span><select id="subsectionSelect" required></select></label>
+            <label><span>Format</span><select id="formatSelect"><option>General</option><option>Gi</option><option>No-Gi</option><option>MMA</option><option>Self-defense</option></select></label>
+            <label><span>Confidence</span><div class="mini-confidence"><input id="confidenceInput" type="range" min="1" max="5" value="2"><output id="confidenceOutput">2 / 5</output></div></label>
+          </div>
+          <div class="stage-capture">
+            <span class="field-caption">Learning stage</span>
+            <select id="statusSelect" aria-label="Learning stage"><option>Inbox</option><option>Want to learn</option><option>Learning</option><option>Drilling</option><option>Reliable</option></select>
+            <div class="form-stage-switch" id="formStageSwitch"><button type="button" data-form-stage="Inbox">Inbox</button><button type="button" data-form-stage="Want to learn">Want</button><button type="button" data-form-stage="Learning">Learning</button><button type="button" data-form-stage="Drilling">Drilling</button><button type="button" data-form-stage="Reliable">Reliable</button></div>
+          </div>
+        </section>
+        <section class="capture-block note-block">
+          <div class="capture-intro"><span class="capture-step">III</span><div><strong>First impression</strong><p>One useful thought is enough. Build the rest in Workshop.</p></div></div>
+          <div class="form-grid">
+            <label class="full"><span>What matters?</span><textarea id="notesInput" rows="4" placeholder="The detail you don’t want to forget…"></textarea></label>
+            <label class="full"><span>Tags</span><input id="tagsInput" placeholder="pressure, counter, footwork"></label>
+          </div>
+          <details class="advanced-fields">
+            <summary>More context <span>Optional</span></summary>
+            <div class="form-grid compact-grid">
+              <label><span>Creator / coach</span><input id="creatorInput" placeholder="Who taught it?"></label>
+              <label><span>Key timestamp</span><input id="timestampInput" placeholder="e.g. 01:24" inputmode="numeric"></label>
+            </div>
+          </details>
+          <label class="practice-next-toggle"><input type="checkbox" id="practiceNextInput"><span class="toggle-control"></span><span><strong>Practice next</strong><small>Pin this to your training queue</small></span></label>
+        </section>
       </div>
-      <div class="capture-intro second"><span class="capture-step">02</span><div><strong>Place it in your game</strong><p>You can develop the details later inside the workshop.</p></div></div>
-      <div class="form-grid">
-        <label><span>Discipline</span><select id="disciplineSelect" required></select></label>
-        <label><span>Subsection</span><select id="subsectionSelect" required></select></label>
-        <label><span>Status</span><select id="statusSelect"><option>Inbox</option><option>Want to learn</option><option>Learning</option><option>Drilling</option><option>Reliable</option></select></label>
-        <label><span>Format</span><select id="formatSelect"><option>General</option><option>Gi</option><option>No-Gi</option><option>MMA</option><option>Self-defense</option></select></label>
-        <label class="full"><span>Tags</span><input id="tagsInput" placeholder="pressure, southpaw, counter (comma separated)"></label>
-        <label class="full"><span>Key details</span><textarea id="notesInput" rows="5" placeholder="What makes this work? Add steps, cues, common mistakes…"></textarea></label>
-        <label class="full confidence-field"><span>Confidence <output id="confidenceOutput">2 / 5</output></span><input id="confidenceInput" type="range" min="1" max="5" value="2"></label>
-      </div>
-      <div class="form-actions"><button type="button" class="danger-link" id="deleteTechnique" hidden>Delete</button><span></span><button type="button" class="ghost-button" data-close="techniqueDialog">Cancel</button><button class="pill-button" value="save">Save technique</button></div>
+      <footer class="form-actions"><button type="button" class="danger-link" id="deleteTechnique" hidden>Delete</button><button type="button" class="ghost-button inbox-save" id="saveInboxBtn">Save to inbox</button><button class="pill-button save-main" value="save"><span>Save technique</span><b>↗</b></button></footer>
     </form>
   </dialog>
 
@@ -125,6 +152,6 @@
   </dialog>
 
   <div class="toast" id="toast" role="status"></div>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
