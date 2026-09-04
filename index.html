@@ -8,8 +8,8 @@
   <title>Combat Notes — Martial Arts Notebook</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&amp;family=EB+Garamond:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=7">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
@@ -24,7 +24,7 @@
       <button class="nav-link" data-view="practice"><i>02</i> Practice</button>
       <button class="nav-link" data-view="collections"><i>03</i> Systems</button>
     </nav>
-    <button class="header-add" id="headerAddBtn">New entry <span>↗</span></button>
+    <button class="header-add" id="headerAddBtn">New entry <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8"/></svg></button>
     <button class="settings-link" id="settingsBtn">Settings</button>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span></span><span></span></button>
   </header>
@@ -41,10 +41,17 @@
           <div class="feature-art" id="featureArt"><span id="featureRoman">I</span><b id="featureLetter">K</b></div>
           <div class="feature-caption">
             <div><small>Last studied / <span id="featurePlatform">Video</span></small><h2 id="featureTitle">Your next technique</h2><p id="featureMeta">Begin your personal archive</p></div>
-            <button class="feature-open" id="featureOpenBtn" aria-label="Open featured technique">↗</button>
+            <button class="feature-open" id="featureOpenBtn" aria-label="Open featured technique"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8"/></svg></button>
           </div>
-          <button class="circle-add magnetic" id="addTechniqueBtn" aria-label="Add technique"><span>+</span><small>New note</small></button>
+          <button class="circle-add magnetic" id="addTechniqueBtn" aria-label="Add technique"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg><small>New note</small></button>
         </article>
+      </section>
+
+      <section class="dashboard-ledger" aria-label="Training overview">
+        <div class="ledger-intro"><span>Today’s overview</span><p>A clear view of what deserves your attention next.</p></div>
+        <button class="ledger-stat" data-dashboard-view="practice"><small>Practice next</small><strong id="practiceNextCount">0</strong><span>Queued techniques</span></button>
+        <button class="ledger-stat" data-dashboard-view="practice"><small>In progress</small><strong id="learningCount">0</strong><span>Learning or drilling</span></button>
+        <button class="ledger-stat" id="randomReviewBtn"><small>Quick review</small><strong id="reviewCount">0</strong><span>Open a random note</span></button>
       </section>
 
       <div class="toolbar">
@@ -68,13 +75,13 @@
           <h2 id="libraryTitle">All techniques</h2><span class="section-rule"></span>
           <div class="view-actions">
             <select id="sortSelect" aria-label="Sort techniques"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">A–Z</option><option value="confidence">Confidence</option></select>
-            <button class="layout-toggle active" data-layout="grid" aria-label="Grid view">⊞</button>
-            <button class="layout-toggle" data-layout="list" aria-label="List view">☷</button>
+            <button class="layout-toggle active" data-layout="grid" aria-label="Grid view"><svg viewBox="0 0 20 20"><path d="M3 3h5v5H3zM12 3h5v5h-5zM3 12h5v5H3zM12 12h5v5h-5z"/></svg></button>
+            <button class="layout-toggle" data-layout="list" aria-label="List view"><svg viewBox="0 0 20 20"><path d="M3 4h14M3 10h14M3 16h14"/></svg></button>
           </div>
         </div>
         <div class="technique-grid" id="techniqueGrid"></div>
         <div class="empty-state" id="emptyState" hidden>
-          <span class="empty-mark">∅</span><h3>No techniques here yet.</h3><p>Save a video, add what you noticed, and make it part of your game.</p><button class="pill-button" id="emptyAddBtn">Add your first note</button>
+          <span class="empty-mark">00</span><h3>No techniques here yet.</h3><p>Save a video, add what you noticed, and make it part of your game.</p><button class="pill-button" id="emptyAddBtn">Add your first note</button>
         </div>
       </section>
     </section>
@@ -113,7 +120,7 @@
         <section class="capture-block source-block">
           <div class="capture-intro"><span class="capture-step">I</span><div><strong>The source</strong><p>Drop the clip now. Organize the lesson around it.</p></div></div>
           <div class="form-grid">
-            <label class="full url-field"><span>Video link</span><div class="url-input-wrap"><span id="urlPlatform">↗</span><input id="videoUrl" type="url" inputmode="url" placeholder="Instagram, TikTok or YouTube link" required><button type="button" id="pasteUrlBtn">Paste</button></div></label>
+            <label class="full url-field"><span>Video link</span><div class="url-input-wrap"><span id="urlPlatform">Link</span><input id="videoUrl" type="url" inputmode="url" placeholder="Instagram, TikTok or YouTube link" required><button type="button" id="pasteUrlBtn">Paste</button></div></label>
             <label class="full title-field"><span>Technique name</span><input id="techniqueName" placeholder="What would you call this?" required maxlength="100"></label>
           </div>
         </section>
@@ -147,7 +154,7 @@
           <label class="practice-next-toggle"><input type="checkbox" id="practiceNextInput"><span class="toggle-control"></span><span><strong>Practice next</strong><small>Pin this to your training queue</small></span></label>
         </section>
       </div>
-      <footer class="form-actions"><button type="button" class="danger-link" id="deleteTechnique" hidden>Delete</button><button type="button" class="ghost-button inbox-save" id="saveInboxBtn">Save to inbox</button><button class="pill-button save-main" value="save"><span>Save technique</span><b>↗</b></button></footer>
+      <footer class="form-actions"><button type="button" class="danger-link" id="deleteTechnique" hidden>Delete</button><button type="button" class="ghost-button inbox-save" id="saveInboxBtn">Save to inbox</button><button class="pill-button save-main" value="save"><span>Save technique</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8"/></svg></button></footer>
     </form>
   </dialog>
 
@@ -164,6 +171,6 @@
   </dialog>
 
   <div class="toast" id="toast" role="status"></div>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
