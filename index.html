@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=8">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
@@ -17,14 +17,14 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"><span></span></div>
   <header class="topbar">
-    <button class="brand" data-view="library" aria-label="Combat Notes home"><b>CN</b><span>Combat<br>Notes</span></button>
+    <button class="brand" data-view="library" aria-label="Combat Notes dashboard"><b>CN</b><span>Combat<br>Notes</span></button>
     <p class="tagline">A personal study<br>of movement &amp; combat</p>
     <nav class="desktop-nav" aria-label="Main navigation">
-      <button class="nav-link active" data-view="library"><i>01</i> Archive</button>
+      <button class="nav-link active" data-view="library"><i>01</i> Dashboard</button>
       <button class="nav-link" data-view="practice"><i>02</i> Practice</button>
       <button class="nav-link" data-view="collections"><i>03</i> Systems</button>
     </nav>
-    <button class="header-add" id="headerAddBtn">New entry <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8"/></svg></button>
+    <button class="header-add" id="headerAddBtn"><span>New entry</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8"/></svg></button>
     <button class="settings-link" id="settingsBtn">Settings</button>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span></span><span></span></button>
   </header>
@@ -35,7 +35,6 @@
         <div class="hero-copy">
           <p class="eyebrow">Private training archive · <span id="techniqueCount">0 techniques</span></p>
           <h1>A study in<br><em>movement.</em></h1>
-          <div class="hero-ledger"><span>Watch</span><i></i><span>Understand</span><i></i><span>Drill</span><i></i><span>Own it</span></div>
         </div>
         <article class="hero-feature" id="heroFeature">
           <div class="feature-art" id="featureArt"><span id="featureRoman">I</span><b id="featureLetter">K</b></div>
@@ -48,7 +47,7 @@
       </section>
 
       <section class="dashboard-ledger" aria-label="Training overview">
-        <div class="ledger-intro"><span>Today’s overview</span><p>A clear view of what deserves your attention next.</p></div>
+        <div class="ledger-intro"><span>Dashboard / Today</span><p>Your training at a glance.</p></div>
         <button class="ledger-stat" data-dashboard-view="practice"><small>Practice next</small><strong id="practiceNextCount">0</strong><span>Queued techniques</span></button>
         <button class="ledger-stat" data-dashboard-view="practice"><small>In progress</small><strong id="learningCount">0</strong><span>Learning or drilling</span></button>
         <button class="ledger-stat" id="randomReviewBtn"><small>Quick review</small><strong id="reviewCount">0</strong><span>Open a random note</span></button>
@@ -72,7 +71,7 @@
 
       <section class="library-section">
         <div class="section-head">
-          <h2 id="libraryTitle">All techniques</h2><span class="section-rule"></span>
+          <h2 id="libraryTitle">Technique archive</h2><span class="section-rule"></span>
           <div class="view-actions">
             <select id="sortSelect" aria-label="Sort techniques"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">A–Z</option><option value="confidence">Confidence</option></select>
             <button class="layout-toggle active" data-layout="grid" aria-label="Grid view"><svg viewBox="0 0 20 20"><path d="M3 3h5v5H3zM12 3h5v5h-5zM3 12h5v5H3zM12 12h5v5h-5z"/></svg></button>
@@ -101,7 +100,7 @@
   <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
     <div class="mobile-menu-head"><span>Combat Notes</span><button id="menuClose" aria-label="Close menu">Close</button></div>
     <div class="mobile-menu-links">
-      <button class="active" data-view="library"><i>I</i><span>Archive</span><small>Saved techniques</small></button>
+      <button class="active" data-view="library"><i>I</i><span>Dashboard</span><small>Overview &amp; archive</small></button>
       <button data-view="practice"><i>II</i><span>Practice</span><small>Your training queue</small></button>
       <button data-view="collections"><i>III</i><span>Systems</span><small>Disciplines & positions</small></button>
     </div>
@@ -171,6 +170,6 @@
   </dialog>
 
   <div class="toast" id="toast" role="status"></div>
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
